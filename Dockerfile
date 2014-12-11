@@ -1,12 +1,16 @@
 FROM ubuntu:14.04
 MAINTAINER Chelsea Zhang <chelsea@bluelabs.com>
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list; apt-get update; apt-get install -y unzip  openjdk-6-jdk wget git
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sources.list; apt-get update; apt-get install -y unzip openjdk-7-jre-headless wget git
 
-RUN wget -q http://mirror.gopotato.co.uk/apache/kafka/0.8.1.1/kafka_2.8.0-0.8.1.1.tgz -O /tmp/kafka_2.8.0-0.8.1.1.tgz
-RUN tar xfz /tmp/kafka_2.8.0-0.8.1.1.tgz -C /opt
+RUN wget -q http://www.carfab.com/apachesoftware/kafka/0.8.2-beta/kafka_2.10-0.8.2-beta.tgz -O /tmp/kafka.tgz
+RUN tar xfz /tmp/kafka.tgz -C /opt
 
-ENV KAFKA_HOME /opt/kafka_2.8.0-0.8.1.1
+ADD server.properties /opt/kafka_2.10-0.8.2-beta/config/server.properties
+
+ADD kafka-statsd-metrics2-0.4.0-SNAPSHOT-all.jar /opt/kafka_2.10-0.8.2-beta/libs/kafka-statsd-metrics.jar
+
+ENV KAFKA_HOME /opt/kafka_2.10-0.8.2-beta
 
 EXPOSE 9092
 
