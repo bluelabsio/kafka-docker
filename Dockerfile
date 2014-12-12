@@ -6,8 +6,6 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu precise universe" >> /etc/apt/sou
 RUN wget -q http://www.carfab.com/apachesoftware/kafka/0.8.2-beta/kafka_2.10-0.8.2-beta.tgz -O /tmp/kafka.tgz
 RUN tar xfz /tmp/kafka.tgz -C /opt
 
-ADD server.properties /opt/kafka_2.10-0.8.2-beta/config/server.properties
-
 ADD kafka-statsd-metrics2-0.4.0-SNAPSHOT-all.jar /opt/kafka_2.10-0.8.2-beta/libs/kafka-statsd-metrics.jar
 
 ENV KAFKA_HOME /opt/kafka_2.10-0.8.2-beta
