@@ -13,6 +13,11 @@ RUN tar xf /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /opt
 VOLUME ["/kafka"]
 
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
+
+EXPOSE 9092
+
+ADD kafka-statsd-metrics2-0.4.0-SNAPSHOT-all.jar ${KAFKA_HOME}/libs/kafka-statsd-metrics.jar
+
 ADD start-kafka.sh /usr/bin/start-kafka.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
 CMD start-kafka.sh

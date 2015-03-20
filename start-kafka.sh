@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# install configuration
+if [ "$SERVER_PROPS_FILE" != "" ]; then
+  cp $SERVER_PROPS_FILE $KAFKA_HOME/config/server.properties
+fi
+
 if [[ -z "$KAFKA_ADVERTISED_PORT" ]]; then
     export KAFKA_ADVERTISED_PORT=$(docker port `hostname` 9092 | sed -r "s/.*:(.*)/\1/g")
 fi
